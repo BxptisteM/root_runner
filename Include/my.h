@@ -31,6 +31,7 @@
     int my_getnbr(char const *str);
     char *my_strcpy(char *dest, char const *src);
     int my_printf(const char *format, ...);
+    void windows(void);
 
-    void main_menu(sfRenderWindow* window);
+
 #endif

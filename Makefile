@@ -10,7 +10,7 @@ SRC     =	src.c	\
 
 OBJ =   $(SRC:.c=.o)
 
-NAME =  my_hunter
+NAME =  Root_runner
 
 CFLAGS = -W -Wall -Wextra
 
