@@ -25,7 +25,6 @@ void game_background(void)
     sfRenderWindow_drawSprite(window, sprite3, NULL);
 }
 
-
 void windows(void)
 {
     sfVideoMode mode = {1920, 1080, 32};
