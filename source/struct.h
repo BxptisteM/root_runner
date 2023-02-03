@@ -1,0 +1,40 @@
+/*
+** EPITECH PROJECT, 2022
+** @BxptisteM | struct.h
+** File description:
+** strcuture for my_hunter.c
+*/
+
+#include <stdio.h>
+#include <SFML/Window.h>
+#include <SFML/Graphics.h>
+#include <SFML/System/Vector3.h>
+#include <SFML/Audio/Sound.h>
+#include <SFML/Audio/Types.h>
+#include <SFML/Audio/Export.h>
+#include <SFML/Audio/SoundBuffer.h>
+#include <SFML/Audio/SoundStatus.h>
+#include <SFML/Audio.h>
+#include <SFML/System/Time.h>
+
+#ifndef __game
+    #define __game
+typedef struct params_s {
+    sfVideoMode mode;
+    sfRenderWindow *window;
+    sfIntRect rect;
+} params_t;
+
+typedef struct object_s {
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfVector2f scale;
+    sfVector2f pos;
+    sfMusic *music;
+} object_t;
+
+typedef struct game_s {
+    params_t params;
+    object_t **objs;
+} game_t;
+#endif
