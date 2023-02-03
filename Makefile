@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SRC     =	src.c	\
+SRC     =	test.c	\
 
 
 OBJ =   $(SRC:.c=.o)
