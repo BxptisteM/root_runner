@@ -16,6 +16,7 @@
 #include <SFML/Audio/SoundStatus.h>
 #include <SFML/Audio.h>
 #include <SFML/System/Time.h>
+#include <stdbool.h>
 
 #ifndef __game
     #define __game
@@ -27,10 +28,12 @@ typedef struct params_s {
 
 typedef struct object_s {
     sfTexture *texture;
+    sfTexture *texture_hover;
     sfSprite *sprite;
     sfVector2f scale;
     sfVector2f pos;
     sfMusic *music;
+    bool hover;
 } object_t;
 
 typedef struct game_s {
