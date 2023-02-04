@@ -85,7 +85,7 @@ void health2(game_t *all)
     all->objs[8]->sprite = sprite8;
     all->objs[8]->scale.x = 0.4;
     all->objs[8]->scale.y = 0.4;
-    all->objs[8]->pos.x = 80;
+    all->objs[8]->pos.x = 90;
     all->objs[8]->pos.y = 0;
     sfSprite_setTexture(all->objs[8]->sprite, all->objs[8]->texture, sfTrue);
     sfSprite_setScale(all->objs[8]->sprite, all->objs[8]->scale);
@@ -102,16 +102,19 @@ void health3(game_t *all)
     all->objs[9]->sprite = sprite9;
     all->objs[9]->scale.x = 0.4;
     all->objs[9]->scale.y = 0.4;
-    all->objs[9]->pos.x = 160;
+    all->objs[9]->pos.x = 180;
     all->objs[9]->pos.y = 0;
     sfSprite_setTexture(all->objs[9]->sprite, all->objs[9]->texture, sfTrue);
     sfSprite_setScale(all->objs[9]->sprite, all->objs[9]->scale);
     sfSprite_setPosition(all->objs[9]->sprite, all->objs[9]->pos);
 }
+
 void game_window_manager(game_t *all)
 {
-    float j = 0.2;
+    int vie = 3;
+    float j = 3;
     sfEvent event;
+    sfTexture *newtexture = sfTexture_createFromFile("ressources/sprites/ath/bad_heart.png", NULL);
     sfSprite *target = all->objs[4]->sprite;
     sfClock *clock = sfClock_create();
     sfTime time;
@@ -125,8 +128,28 @@ void game_window_manager(game_t *all)
             sfSprite_setPosition(all->objs[4]->sprite,all->objs[4]->pos);
             if (all->objs[4]->pos.x <= 100) {
                 all->objs[4]->pos.x = 1900;
-                j = j+ 0.05;
+                j = j + 0.05;
+                if (vie == 1) {
+                all->objs[9]->texture = newtexture;
+                sfSprite_setTexture(all->objs[7]->sprite, newtexture, sfTrue);
+                vie = vie - 1;
+                }
+                if (vie == 2) {
+                all->objs[9]->texture = newtexture;
+                sfSprite_setTexture(all->objs[8]->sprite, newtexture, sfTrue);
+                vie = vie - 1;
+                }
+                if (vie == 3) {
+                all->objs[9]->texture = newtexture;
+                sfSprite_setTexture(all->objs[9]->sprite, newtexture, sfTrue);
+                vie = vie - 1;
+                }
+                }
+                if (vie == 0) {
+                menu(all);
+
             }
+
         }
         sfRenderWindow_clear(all->params.window, sfBlack);
         sfRenderWindow_drawSprite(all->params.window, all->objs[3]->sprite, NULL);
