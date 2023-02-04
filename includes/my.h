@@ -18,6 +18,7 @@
 #include <SFML/System/Time.h>
 #include <time.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #ifndef my_hunter
     #define my_hunter

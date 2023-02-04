@@ -27,20 +27,59 @@ void create_background(game_t *all)
 
 void create_start_button(game_t *all)
 {
-    sfTexture *texture2 = sfTexture_createFromFile("ressources/sprites/menu/p.png", NULL);
-    sfSprite *sprite2 = sfSprite_create();
+    sfTexture *texture1 = sfTexture_createFromFile("ressources/sprites/menu/start.png", NULL);
+    sfTexture *texture5 = sfTexture_createFromFile("ressources/sprites/menu/start2.png", NULL);
+    sfSprite *sprite = sfSprite_create();
 
     all->objs[1] = malloc(sizeof(object_t));
-    all->objs[1]->texture = texture2;
-    all->objs[1]->sprite = sprite2;
+    all->objs[1]->texture = texture1;
+    all->objs[1]->texture_hover = texture5;
+    all->objs[1]->sprite = sprite;
     all->objs[1]->scale.x = 1;
     all->objs[1]->scale.y = 1;
     all->objs[1]->pos.x = 580;
     all->objs[1]->pos.y = 440;
+    all->objs[1]->hover = false;
     sfSprite_setTexture(all->objs[1]->sprite, all->objs[1]->texture, sfTrue);
     sfSprite_setScale(all->objs[1]->sprite, all->objs[1]->scale);
     sfSprite_setPosition(all->objs[1]->sprite, all->objs[1]->pos);
 }
+
+void handle_start_button_hover(game_t *all)
+{
+    sfFloatRect start_button_bounds = sfSprite_getGlobalBounds(all->objs[1]->sprite);
+    sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(all->params.window);
+    sfVector2f mouse_pos_f = {(float) mouse_pos.x, (float) mouse_pos.y};
+
+    if (sfFloatRect_contains(&start_button_bounds, mouse_pos_f.x, mouse_pos_f.y))
+    {
+        all->objs[1]->hover = true;
+        sfSprite_setTexture(all->objs[1]->sprite, all->objs[1]->texture_hover, sfTrue);
+    }
+    else
+    {
+        all->objs[1]->hover = false;
+        sfSprite_setTexture(all->objs[1]->sprite, all->objs[1]->texture, sfTrue);
+    }
+}
+
+
+// void mouse_on_button(game_t *all)
+// {
+//     sfTexture *texture5 = sfTexture_createFromFile("ressources/sprites/menu/start.png", NULL);
+//     sfSprite *sprite5 = sfSprite_create();
+
+//     all->objs[5] = malloc(sizeof(object_t));
+//     all->objs[5]->texture = texture5;
+//     all->objs[5]->sprite = sprite5;
+//     all->objs[5]->scale.x = 1;
+//     all->objs[5]->scale.y = 1;
+//     all->objs[5]->pos.x = 580;
+//     all->objs[5]->pos.y = 440;
+//     sfSprite_setTexture(all->objs[5]->sprite, all->objs[5]->texture, sfTrue);
+//     sfSprite_setScale(all->objs[5]->sprite, all->objs[5]->scale);
+//     sfSprite_setPosition(all->objs[5]->sprite, all->objs[5]->pos);
+// }
 
 void create_objects(game_t *all)
 {
@@ -79,6 +118,7 @@ void menu(game_t *all)
             sfRenderWindow_drawSprite(all->params.window, all->objs[0]->sprite, NULL);
             sfRenderWindow_drawSprite(all->params.window, all->objs[1]->sprite, NULL);
             sfRenderWindow_display(all->params.window);
+            handle_start_button_hover(all);
         }
     }
 }
