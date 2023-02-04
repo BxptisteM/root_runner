@@ -70,6 +70,7 @@ void create_objects(game_t *all)
     create_start_button(all);
     game_background(all);
     game_target(all);
+    health(all);
 }
 
 int start(game_t *all)

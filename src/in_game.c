@@ -58,29 +58,46 @@ void game_target(game_t *all)
 
 }
 
+void health(game_t *all)
+{
+    sfTexture *texture7 = sfTexture_createFromFile("ressources/sprites/ath/heart.png", NULL);
+    sfSprite *sprite7 = sfSprite_create();
+
+    all->objs[7] = malloc(sizeof(object_t));
+    all->objs[7]->texture = texture7;
+    all->objs[7]->sprite = sprite7;
+    all->objs[7]->scale.x = 1;
+    all->objs[7]->scale.y = 1;
+    all->objs[7]->pos.x = 0;
+    all->objs[7]->pos.y = 0;
+    sfSprite_setTexture(all->objs[7]->sprite, all->objs[7]->texture, sfTrue);
+    sfSprite_setScale(all->objs[7]->sprite, all->objs[7]->scale);
+    sfSprite_setPosition(all->objs[7]->sprite, all->objs[7]->pos);
+}
+
 void game_window_manager(game_t *all)
 {
+    float j = 0.2;
     sfEvent event;
     sfSprite *target = all->objs[4]->sprite;
     sfClock *clock = sfClock_create();
     sfTime time;
-    float seconds;
 
     while (sfRenderWindow_isOpen(all->params.window)) {
         while (sfRenderWindow_pollEvent(all->params.window, &event)) {
             close_window(all);
         }
-
+        if (all->objs[4]->pos.x != -20) {
+            all->objs[4]->pos.x = all->objs[4]->pos.x - j;
+            sfSprite_setPosition(all->objs[4]->sprite,all->objs[4]->pos);
+            if (all->objs[4]->pos.x <= 100) {
+                all->objs[4]->pos.x = 1900;
+                j = j+ 0.05;
+            }
+        }
         sfRenderWindow_clear(all->params.window, sfBlack);
         sfRenderWindow_drawSprite(all->params.window, all->objs[3]->sprite, NULL);
-        time = sfClock_getElapsedTime(clock);
-
-        seconds = time.microseconds / 1000000.0;
-        if (seconds > 0.1) {
-            sfSprite_move(target, (sfVector2f){- 12, 0});
-            sfClock_restart(clock);
-        }
-        sfRenderWindow_drawSprite(all->params.window, target, NULL);
+        sfRenderWindow_drawSprite(all->params.window, all->objs[7]->sprite, NULL);
         sfRenderWindow_display(all->params.window);
     }
 }
