@@ -41,5 +41,9 @@ int choice(game_t *all,int ac, char *av[]);
 void health(game_t *all);
 void health2(game_t *all);
 void health3(game_t *all);
-void player(game_t *all);
+void game_over_background(game_t *all);
+void game_over_screen(game_t *all);
+void main_menu_button(game_t *all);
+void quit_button(game_t *all);
+void game_background2(game_t *all);
 #endif

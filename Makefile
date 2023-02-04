@@ -2,14 +2,14 @@
 ## EPITECH PROJECT, 2022
 ## Makefile
 ## File description:
-## Makefile7
+## Makefile
 ##
 
 SRC   = main.c		                 		\
 		src/utils.c 						\
 		src/menu.c							\
 		src/in_game.c 						\
-		src/player.c 						\
+		src/game_over.c 					\
 		lib/my/my_putstr.c					\
 		lib/my/my_putstr_err.c 				\
 		lib/my/my_putchar.c 				\

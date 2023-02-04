@@ -24,16 +24,22 @@ typedef struct params_s {
     sfVideoMode mode;
     sfRenderWindow *window;
     sfIntRect rect;
+    int x_move;
 } params_t;
 
 typedef struct object_s {
     sfTexture *texture;
     sfTexture *texture_hover;
+    sfTexture *texture_hover2;
+    sfTexture *texture_hover3;
     sfSprite *sprite;
     sfVector2f scale;
     sfVector2f pos;
     sfMusic *music;
     bool hover;
+    bool hover2;
+    bool hover3;
+
 } object_t;
 
 typedef struct game_s {

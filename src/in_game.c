@@ -18,6 +18,15 @@ void init_game_music(game_t *all)
     sfMusic_setLoop(all->objs[11]->music, sfTrue);
 }
 
+void hit_music(game_t *all)
+{
+    sfMusic *music = sfMusic_createFromFile("ressources/sounds/effects/hit_song.wav");
+    all->objs[19] = malloc(sizeof(object_t));
+    all->objs[19]->music = music;
+    sfMusic_play(all->objs[19]->music);
+    sfMusic_setLoop(all->objs[19]->music, sfTrue);
+}
+
 void game_background(game_t *all)
 {
     sfTexture *texture3 = sfTexture_createFromFile("ressources/sprites/backgrounds/Background.png", NULL);
@@ -33,6 +42,24 @@ void game_background(game_t *all)
     sfSprite_setTexture(all->objs[3]->sprite, all->objs[3]->texture, sfTrue);
     sfSprite_setScale(all->objs[3]->sprite, all->objs[3]->scale);
     sfSprite_setPosition(all->objs[3]->sprite, all->objs[3]->pos);
+}
+
+void game_background2(game_t *all)
+{
+    all->params.x_move = 1920;
+    sfTexture *texture3 = sfTexture_createFromFile("ressources/sprites/backgrounds/Background.png", NULL);
+    sfSprite *sprite3 = sfSprite_create();
+
+    all->objs[13] = malloc(sizeof(object_t));
+    all->objs[13]->texture = texture3;
+    all->objs[13]->sprite = sprite3;
+    all->objs[13]->scale.x = 1.6;
+    all->objs[13]->scale.y = 1;
+    all->objs[13]->pos.x = all->params.x_move;
+    all->objs[13]->pos.y = 0;
+    sfSprite_setTexture(all->objs[13]->sprite, all->objs[13]->texture, sfTrue);
+    sfSprite_setScale(all->objs[13]->sprite, all->objs[13]->scale);
+    sfSprite_setPosition(all->objs[13]->sprite, all->objs[13]->pos);
 }
 
 void game_target(game_t *all)
@@ -112,50 +139,71 @@ void game_window_manager(game_t *all)
 {
     int vie = 3;
     float j = 3;
+    sfSoundBuffer *soundBuffer = sfSoundBuffer_createFromFile("ressources/sounds/effects/hit_song.wav");
+    sfSound *sound = sfSound_create();
     sfEvent event;
     sfTexture *newtexture = sfTexture_createFromFile("ressources/sprites/ath/bad_heart.png", NULL);
     sfSprite *target = all->objs[4]->sprite;
     sfClock *clock = sfClock_create();
+    sfRenderWindow_setFramerateLimit(all->params.window, 32);
     sfTime time;
     init_game_music(all);
     while (sfRenderWindow_isOpen(all->params.window)) {
         while (sfRenderWindow_pollEvent(all->params.window, &event)) {
             close_window(all);
         }
+        if (all->objs[3]->pos.x != -1920) {
+            all->objs[3]->pos.x = all->objs[3]->pos.x - 1;
+            sfSprite_setPosition(all->objs[3]->sprite,all->objs[3]->pos);
+            if (all->objs[3]->pos.x <= -1920) {
+                all->objs[3]->pos.x = 1920;
+            }
+        }
+        if (all->objs[13]->pos.x != -1920) {
+            all->objs[13]->pos.x = all->objs[13]->pos.x - 1;
+            sfSprite_setPosition(all->objs[13]->sprite,all->objs[13]->pos);
+            if (all->objs[13]->pos.x <= -1920) {
+                all->objs[13]->pos.x = 1920;
+            }
+        }
         if (all->objs[4]->pos.x != -20) {
             all->objs[4]->pos.x = all->objs[4]->pos.x - j;
             sfSprite_setPosition(all->objs[4]->sprite,all->objs[4]->pos);
             if (all->objs[4]->pos.x <= 100) {
                 all->objs[4]->pos.x = 1900;
-                j = j + 0.05;
+                j = j * 1.2;
                 if (vie == 1) {
-                all->objs[9]->texture = newtexture;
-                sfSprite_setTexture(all->objs[7]->sprite, newtexture, sfTrue);
-                vie = vie - 1;
+                    all->objs[9]->texture = newtexture;
+                    sfSprite_setTexture(all->objs[7]->sprite, newtexture, sfTrue);
+                    sfSound_setBuffer(sound, soundBuffer);
+                    sfSound_play(sound);
+                    vie = vie - 1;
                 }
                 if (vie == 2) {
-                all->objs[9]->texture = newtexture;
-                sfSprite_setTexture(all->objs[8]->sprite, newtexture, sfTrue);
-                vie = vie - 1;
+                    all->objs[9]->texture = newtexture;
+                    sfSprite_setTexture(all->objs[8]->sprite, newtexture, sfTrue);
+                    sfSound_setBuffer(sound, soundBuffer);
+                    sfSound_play(sound);
+                    vie = vie - 1;
                 }
                 if (vie == 3) {
-                all->objs[9]->texture = newtexture;
-                sfSprite_setTexture(all->objs[9]->sprite, newtexture, sfTrue);
-                vie = vie - 1;
+                    all->objs[9]->texture = newtexture;
+                    sfSprite_setTexture(all->objs[9]->sprite, newtexture, sfTrue);
+                    sfSound_setBuffer(sound, soundBuffer);
+                    sfSound_play(sound);
+                    vie = vie - 1;
                 }
                 }
                 if (vie == 0) {
-                menu(all);
-
+                    game_over_screen(all);
             }
-
         }
         sfRenderWindow_clear(all->params.window, sfBlack);
         sfRenderWindow_drawSprite(all->params.window, all->objs[3]->sprite, NULL);
+        sfRenderWindow_drawSprite(all->params.window, all->objs[13]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[7]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[8]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[9]->sprite, NULL);
-        sfRenderWindow_drawSprite(all->params.window, all->objs[6]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, target, NULL);
         sfRenderWindow_display(all->params.window);
     }
