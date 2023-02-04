@@ -17,6 +17,7 @@
 #include <SFML/Audio/SoundStatus.h>
 #include <SFML/System/Time.h>
 #include <time.h>
+#include <stdlib.h>
 
 #ifndef my_hunter
     #define my_hunter
@@ -32,4 +33,7 @@ void game_background(game_t *all);
 void init_music(game_t *all);
 int start(game_t *ALL);
 void menu(game_t *ALL);
+int ac_errors(int ac, char **av);
+void create_window(game_t *all);
+int root_runner_help(char **av);
 #endif

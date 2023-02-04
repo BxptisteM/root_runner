@@ -5,8 +5,9 @@
 ## Makefile
 ##
 
-SRC   = root_runner.c                 		\
-		src/start.c	 						\
+SRC   = main.c		                 		\
+		src/utils.c 						\
+		src/menu.c							\
 		src/in_game.c 						\
 		lib/my/my_putstr.c					\
 		lib/my/my_putstr_err.c 				\

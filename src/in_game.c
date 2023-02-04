@@ -65,13 +65,16 @@ void game_window_manager(game_t *all)
     sfClock *clock = sfClock_create();
     sfTime time;
     float seconds;
+
     while (sfRenderWindow_isOpen(all->params.window)) {
         while (sfRenderWindow_pollEvent(all->params.window, &event)) {
             close_window(all);
         }
+
         sfRenderWindow_clear(all->params.window, sfBlack);
-    sfRenderWindow_drawSprite(all->params.window, all->objs[3]->sprite, NULL);
-                time = sfClock_getElapsedTime(clock);
+        sfRenderWindow_drawSprite(all->params.window, all->objs[3]->sprite, NULL);
+        time = sfClock_getElapsedTime(clock);
+
         seconds = time.microseconds / 1000000.0;
         if (seconds > 0.1) {
             sfSprite_move(target, (sfVector2f){12, 0});
@@ -79,13 +82,5 @@ void game_window_manager(game_t *all)
         }
         sfRenderWindow_drawSprite(all->params.window, target, NULL);
         sfRenderWindow_display(all->params.window);
-    }
-}
-
-void close_window(game_t *all)
-{
-    sfEvent event;
-    if (event.type == sfEvtClosed) {
-    sfRenderWindow_close(all->params.window);
     }
 }

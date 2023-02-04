@@ -25,8 +25,8 @@ void menu(game_t *all)
             close_window(all);
             sfRenderWindow_clear(all->params.window, sfBlack);
             start_button(all, event);
-    sfRenderWindow_drawSprite(all->params.window, all->objs[0]->sprite, NULL);
-    sfRenderWindow_drawSprite(all->params.window, all->objs[1]->sprite, NULL);
+            sfRenderWindow_drawSprite(all->params.window, all->objs[0]->sprite, NULL);
+            sfRenderWindow_drawSprite(all->params.window, all->objs[1]->sprite, NULL);
             sfRenderWindow_display(all->params.window);
         }
     }
@@ -34,18 +34,10 @@ void menu(game_t *all)
 
 int main(int ac, char **av)
 {
-    if (ac > 2){
-        my_putstr_err("Too many arguments.");
+    if (ac_errors(ac, av) == 84) {
+        return (84);
     }
-    if (av[1] = "-h") {
-        my_putstr("Remake of the Duck Hunt video game\n");
-    }
-    if (ac > 2){
-        my_putstr_err("Too many arguments.");
-    }
-    if (av[1] != "-h") {
-        my_putstr_err("Bad arguments");
-    }
+
     if (ac == 1) {
     game_t all;
     init_music(&all);

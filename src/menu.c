@@ -1,25 +1,12 @@
 /*
-** EPITECH PROJECT, 2022
-** open_window
+** EPITECH PROJECT, 2023
+** @BxptisteM |global game jam
 ** File description:
-** SFML bs
+** root runner
 */
 
 #include "../includes/my.h"
 #include "../includes/struct.h"
-#include <stdlib.h>
-
-void create_window(game_t *all)
-{
-    sfRenderWindow *window;
-    sfVideoMode video_mode = {1920,1080, 32};
-
-    window = sfRenderWindow_create (video_mode, "hunt", sfDefaultStyle, NULL);
-    all->params.mode.width = 1920;
-    all->params.mode.height = 1080;
-    all->params.mode.bitsPerPixel = 32;
-    all->params.window = window;
-}
 
 void create_background(game_t *all)
 {
@@ -70,4 +57,28 @@ int start(game_t *all)
     create_objects(all);
 
     return (0);
+}
+
+void start_button(game_t *all, sfEvent event)
+{
+    if (event.mouseButton.x >= 580 && event.mouseButton.x <= 1330 &&
+        event.mouseButton.y >= 450 && event.mouseButton.y <= 690) {
+        game_window_manager(all);
+    }
+}
+
+void menu(game_t *all)
+{
+    sfEvent event;
+
+    while (sfRenderWindow_isOpen(all->params.window)) {
+        while (sfRenderWindow_pollEvent(all->params.window, &event)) {
+            close_window(all);
+            sfRenderWindow_clear(all->params.window, sfBlack);
+            start_button(all, event);
+            sfRenderWindow_drawSprite(all->params.window, all->objs[0]->sprite, NULL);
+            sfRenderWindow_drawSprite(all->params.window, all->objs[1]->sprite, NULL);
+            sfRenderWindow_display(all->params.window);
+        }
+    }
 }
