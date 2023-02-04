@@ -25,7 +25,6 @@ int main(int ac, char **av)
     game_t all;
 
     if (choice(&all,ac, av) == 0) {
-    init_music(&all);
     start(&all);
     menu(&all);
     }

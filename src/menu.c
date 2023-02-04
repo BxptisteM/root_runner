@@ -8,6 +8,15 @@
 #include "../includes/my.h"
 #include "../includes/struct.h"
 
+void init_music(game_t *all)
+{
+    sfMusic *music = sfMusic_createFromFile("ressources/sounds/musics/menu.wav");
+    all->objs[2] = malloc(sizeof(object_t));
+    all->objs[2]->music = music;
+    sfMusic_play(all->objs[2]->music);
+    sfMusic_setLoop(all->objs[2]->music, sfTrue);
+}
+
 void create_background(game_t *all)
 {
     sfTexture *texture = sfTexture_createFromFile("ressources/sprites/menu/main_menu.png", NULL);
@@ -87,6 +96,11 @@ void start_button(game_t *all, sfEvent event)
 {
     if (event.mouseButton.x >= 580 && event.mouseButton.x <= 1330 &&
         event.mouseButton.y >= 450 && event.mouseButton.y <= 690) {
+        sfSoundBuffer *soundBuffer = sfSoundBuffer_createFromFile("ressources/sounds/effects/SFX_6.wav");
+        sfSound *sound = sfSound_create();
+        sfSound_setBuffer(sound, soundBuffer);
+        sfSound_play(sound);
+        sfMusic_destroy(all->objs[2]->music);
         game_window_manager(all);
     }
 }
@@ -94,7 +108,7 @@ void start_button(game_t *all, sfEvent event)
 void menu(game_t *all)
 {
     sfEvent event;
-
+    init_music(all);
     while (sfRenderWindow_isOpen(all->params.window)) {
         while (sfRenderWindow_pollEvent(all->params.window, &event)) {
             close_window(all);

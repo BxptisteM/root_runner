@@ -9,14 +9,13 @@
 #include "../includes/struct.h"
 #include <stdlib.h>
 
-void init_music(game_t *all)
+void init_game_music(game_t *all)
 {
-    //sfMusic *music = sfMusic_createFromFile("ressources/sounds/musics/Relapse21_-_SNES.wav"); //chill
-    sfMusic *music = sfMusic_createFromFile("ressources/sounds/musics/Relapse21-SNES-2.wav"); //combat
-    all->objs[2] = malloc(sizeof(object_t));
-    all->objs[2]->music = music;
-    sfMusic_play(all->objs[2]->music);
-    sfMusic_setLoop(all->objs[2]->music, sfTrue);
+    sfMusic *music = sfMusic_createFromFile("ressources/sounds/musics/in_game.wav");
+    all->objs[11] = malloc(sizeof(object_t));
+    all->objs[11]->music = music;
+    sfMusic_play(all->objs[11]->music);
+    sfMusic_setLoop(all->objs[11]->music, sfTrue);
 }
 
 void game_background(game_t *all)
@@ -118,7 +117,7 @@ void game_window_manager(game_t *all)
     sfSprite *target = all->objs[4]->sprite;
     sfClock *clock = sfClock_create();
     sfTime time;
-
+    init_game_music(all);
     while (sfRenderWindow_isOpen(all->params.window)) {
         while (sfRenderWindow_pollEvent(all->params.window, &event)) {
             close_window(all);
@@ -156,7 +155,6 @@ void game_window_manager(game_t *all)
         sfRenderWindow_drawSprite(all->params.window, all->objs[7]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[8]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[9]->sprite, NULL);
-
         sfRenderWindow_drawSprite(all->params.window, target, NULL);
         sfRenderWindow_display(all->params.window);
     }
