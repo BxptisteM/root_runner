@@ -65,12 +65,14 @@ void handle_start_button_hover(game_t *all)
 
 void create_objects(game_t *all)
 {
-    all->objs = malloc(sizeof(object_t *) * (6 + 1));
+    all->objs = malloc(sizeof(object_t *) * (15 + 1));
     create_background(all);
     create_start_button(all);
     game_background(all);
     game_target(all);
     health(all);
+    health2(all);
+    health3(all);
 }
 
 int start(game_t *all)

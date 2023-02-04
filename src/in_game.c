@@ -66,8 +66,8 @@ void health(game_t *all)
     all->objs[7] = malloc(sizeof(object_t));
     all->objs[7]->texture = texture7;
     all->objs[7]->sprite = sprite7;
-    all->objs[7]->scale.x = 1;
-    all->objs[7]->scale.y = 1;
+    all->objs[7]->scale.x = 0.4;
+    all->objs[7]->scale.y = 0.4;
     all->objs[7]->pos.x = 0;
     all->objs[7]->pos.y = 0;
     sfSprite_setTexture(all->objs[7]->sprite, all->objs[7]->texture, sfTrue);
@@ -75,6 +75,39 @@ void health(game_t *all)
     sfSprite_setPosition(all->objs[7]->sprite, all->objs[7]->pos);
 }
 
+void health2(game_t *all)
+{
+    sfTexture *texture8 = sfTexture_createFromFile("ressources/sprites/ath/heart.png", NULL);
+    sfSprite *sprite8 = sfSprite_create();
+
+    all->objs[8] = malloc(sizeof(object_t));
+    all->objs[8]->texture = texture8;
+    all->objs[8]->sprite = sprite8;
+    all->objs[8]->scale.x = 0.4;
+    all->objs[8]->scale.y = 0.4;
+    all->objs[8]->pos.x = 80;
+    all->objs[8]->pos.y = 0;
+    sfSprite_setTexture(all->objs[8]->sprite, all->objs[8]->texture, sfTrue);
+    sfSprite_setScale(all->objs[8]->sprite, all->objs[8]->scale);
+    sfSprite_setPosition(all->objs[8]->sprite, all->objs[8]->pos);
+}
+
+void health3(game_t *all)
+{
+    sfTexture *texture9 = sfTexture_createFromFile("ressources/sprites/ath/heart.png", NULL);
+    sfSprite *sprite9 = sfSprite_create();
+
+    all->objs[9] = malloc(sizeof(object_t));
+    all->objs[9]->texture = texture9;
+    all->objs[9]->sprite = sprite9;
+    all->objs[9]->scale.x = 0.4;
+    all->objs[9]->scale.y = 0.4;
+    all->objs[9]->pos.x = 160;
+    all->objs[9]->pos.y = 0;
+    sfSprite_setTexture(all->objs[9]->sprite, all->objs[9]->texture, sfTrue);
+    sfSprite_setScale(all->objs[9]->sprite, all->objs[9]->scale);
+    sfSprite_setPosition(all->objs[9]->sprite, all->objs[9]->pos);
+}
 void game_window_manager(game_t *all)
 {
     float j = 0.2;
@@ -98,6 +131,10 @@ void game_window_manager(game_t *all)
         sfRenderWindow_clear(all->params.window, sfBlack);
         sfRenderWindow_drawSprite(all->params.window, all->objs[3]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[7]->sprite, NULL);
+        sfRenderWindow_drawSprite(all->params.window, all->objs[8]->sprite, NULL);
+        sfRenderWindow_drawSprite(all->params.window, all->objs[9]->sprite, NULL);
+
+        sfRenderWindow_drawSprite(all->params.window, target, NULL);
         sfRenderWindow_display(all->params.window);
     }
 }
