@@ -155,6 +155,7 @@ void game_window_manager(game_t *all)
         sfRenderWindow_drawSprite(all->params.window, all->objs[7]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[8]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[9]->sprite, NULL);
+        sfRenderWindow_drawSprite(all->params.window, all->objs[6]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, target, NULL);
         sfRenderWindow_display(all->params.window);
     }

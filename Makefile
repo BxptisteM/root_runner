@@ -2,7 +2,7 @@
 ## EPITECH PROJECT, 2022
 ## Makefile
 ## File description:
-## Makefile
+## Makefile7
 ##
 
 SRC   = main.c		                 		\
