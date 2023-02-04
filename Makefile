@@ -5,18 +5,17 @@
 ## Makefile
 ##
 
-SRC   = my_hunter.c                 		\
-		source/start.c	 					\
-		source/in_game.c 					\
-		source/sprites_managment.c			\
-		source/my_putstr.c					\
-		source/my_putstr_err.c 				\
-		source/my_putchar.c 				\
-		source/my_putchar_err.c 			\
+SRC   = root_runner.c                 		\
+		src/start.c	 						\
+		src/in_game.c 						\
+		lib/my/my_putstr.c					\
+		lib/my/my_putstr_err.c 				\
+		lib/my/my_putchar.c 				\
+		lib/my/my_putchar_err.c 			\
 
 OBJ =   $(SRC:.c=.o)
 
-NAME =  my_hunter
+NAME =  root_runner
 
 CSFML = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window
 
