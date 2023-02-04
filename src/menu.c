@@ -63,24 +63,6 @@ void handle_start_button_hover(game_t *all)
     }
 }
 
-
-// void mouse_on_button(game_t *all)
-// {
-//     sfTexture *texture5 = sfTexture_createFromFile("ressources/sprites/menu/start.png", NULL);
-//     sfSprite *sprite5 = sfSprite_create();
-
-//     all->objs[5] = malloc(sizeof(object_t));
-//     all->objs[5]->texture = texture5;
-//     all->objs[5]->sprite = sprite5;
-//     all->objs[5]->scale.x = 1;
-//     all->objs[5]->scale.y = 1;
-//     all->objs[5]->pos.x = 580;
-//     all->objs[5]->pos.y = 440;
-//     sfSprite_setTexture(all->objs[5]->sprite, all->objs[5]->texture, sfTrue);
-//     sfSprite_setScale(all->objs[5]->sprite, all->objs[5]->scale);
-//     sfSprite_setPosition(all->objs[5]->sprite, all->objs[5]->pos);
-// }
-
 void create_objects(game_t *all)
 {
     all->objs = malloc(sizeof(object_t *) * (6 + 1));

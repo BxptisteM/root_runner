@@ -37,4 +37,5 @@ void menu(game_t *ALL);
 int ac_errors(int ac, char **av);
 void create_window(game_t *all);
 int root_runner_help(char **av);
+int choice(game_t *all,int ac, char *av[]);
 #endif

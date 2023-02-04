@@ -21,13 +21,13 @@ void init_music(game_t *all)
 
 void game_background(game_t *all)
 {
-    sfTexture *texture3 = sfTexture_createFromFile("ressources/sprites/backgrounds/BG.png", NULL);
+    sfTexture *texture3 = sfTexture_createFromFile("ressources/sprites/backgrounds/Background.png", NULL);
     sfSprite *sprite3 = sfSprite_create();
 
     all->objs[3] = malloc(sizeof(object_t));
     all->objs[3]->texture = texture3;
     all->objs[3]->sprite = sprite3;
-    all->objs[3]->scale.x = 1;
+    all->objs[3]->scale.x = 1.6;
     all->objs[3]->scale.y = 1;
     all->objs[3]->pos.x = 0;
     all->objs[3]->pos.y = 0;
@@ -35,27 +35,27 @@ void game_background(game_t *all)
     sfSprite_setScale(all->objs[3]->sprite, all->objs[3]->scale);
     sfSprite_setPosition(all->objs[3]->sprite, all->objs[3]->pos);
 }
+
 void game_target(game_t *all)
 {
     sfTexture *texture4 = sfTexture_createFromFile("ressources/sprites/hostiles/arbre1.png", NULL);
     sfSprite *sprite4 = sfSprite_create();
 
-    int j = 0;
-    const int min = 80, max = 900;
+    int j = 870;
     srand(time(NULL));
-    j = (rand() % (max + 1 - min)) + min;
 
     all->objs[4] = malloc(sizeof(object_t));
     all->objs[4]->texture = texture4;
     all->objs[4]->sprite = sprite4;
     all->objs[4]->scale.x = 1;
     all->objs[4]->scale.y = 1;
-    all->objs[4]->pos.x = 0;
+    all->objs[4]->pos.x = 1900;
     all->objs[4]->pos.y = j;
     sfSprite_setTexture(all->objs[4]->sprite, all->objs[4]->texture, sfTrue);
     sfSprite_setTextureRect(all->objs[4]->sprite, (sfIntRect){0, 0, 250, 250});
     sfSprite_setScale(all->objs[4]->sprite, all->objs[4]->scale);
     sfSprite_setPosition(all->objs[4]->sprite, all->objs[4]->pos);
+
 }
 
 void game_window_manager(game_t *all)
@@ -77,7 +77,7 @@ void game_window_manager(game_t *all)
 
         seconds = time.microseconds / 1000000.0;
         if (seconds > 0.1) {
-            sfSprite_move(target, (sfVector2f){12, 0});
+            sfSprite_move(target, (sfVector2f){- 12, 0});
             sfClock_restart(clock);
         }
         sfRenderWindow_drawSprite(all->params.window, target, NULL);

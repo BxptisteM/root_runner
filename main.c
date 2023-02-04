@@ -22,15 +22,11 @@ void create_window(game_t *all)
 
 int main(int ac, char **av)
 {
-    // if (ac_errors(ac, av) == 84) {
-    //     return (84);
-    // }
-    // root_runner_help(av);
-    if (ac == 1) {
     game_t all;
+
+    if (choice(&all,ac, av) == 0) {
     init_music(&all);
     start(&all);
     menu(&all);
-    return (0);
     }
 }
