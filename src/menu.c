@@ -82,6 +82,7 @@ void create_objects(game_t *all)
     health(all);
     health2(all);
     health3(all);
+    player(all);
 }
 
 int start(game_t *all)

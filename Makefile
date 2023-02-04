@@ -9,6 +9,7 @@ SRC   = main.c		                 		\
 		src/utils.c 						\
 		src/menu.c							\
 		src/in_game.c 						\
+		src/player.c 						\
 		lib/my/my_putstr.c					\
 		lib/my/my_putstr_err.c 				\
 		lib/my/my_putchar.c 				\
