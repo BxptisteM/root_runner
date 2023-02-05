@@ -25,6 +25,8 @@ typedef struct params_s {
     sfRenderWindow *window;
     sfIntRect rect;
     int x_move;
+    int vie;
+    float j;
 } params_t;
 
 typedef struct object_s {

@@ -24,8 +24,8 @@ int main(int ac, char **av)
 {
     game_t all;
 
-    if (choice(&all,ac, av) == 0) {
+    if (choice(&all, ac, av) == 0) {
     start(&all);
-    menu(&all);
+    menu(ac, av, &all);
     }
 }
