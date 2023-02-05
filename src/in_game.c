@@ -77,11 +77,8 @@ void game_target(game_t *all)
     all->objs[4]->pos.x = 1900;
     all->objs[4]->pos.y = j;
     sfSprite_setTexture(all->objs[4]->sprite, all->objs[4]->texture, sfTrue);
-    sfSprite_setTextureRect(all->objs[4]->sprite, (sfIntRect){0, 0, 250, 250});
     sfSprite_setScale(all->objs[4]->sprite, all->objs[4]->scale);
     sfSprite_setPosition(all->objs[4]->sprite, all->objs[4]->pos);
-
-    all->objs[4]->hitbox = sfSprite_getGlobalBounds(all->objs[4]->sprite);
 }
 
 void health(game_t *all)
@@ -147,11 +144,8 @@ void player(game_t *all)
     all->objs[14]->pos.x = 100;
     all->objs[14]->pos.y = 870;
     sfSprite_setTexture(all->objs[14]->sprite, all->objs[14]->texture, sfTrue);
-    sfSprite_setTextureRect(all->objs[14]->sprite, (sfIntRect){0, 0, 250, 250});
     sfSprite_setScale(all->objs[14]->sprite, all->objs[14]->scale);
     sfSprite_setPosition(all->objs[14]->sprite, all->objs[14]->pos);
-
-    all->objs[14]->hitbox = sfSprite_getGlobalBounds(all->objs[14]->sprite);
 }
 
 void game_window_manager(int ac, char **av, game_t *all)

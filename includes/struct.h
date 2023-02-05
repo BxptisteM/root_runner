@@ -38,7 +38,6 @@ typedef struct object_s {
     sfVector2f scale;
     sfVector2f pos;
     sfMusic *music;
-    sfFloatRect hitbox;
     bool hover;
     bool hover2;
     bool hover3;
