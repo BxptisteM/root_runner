@@ -68,7 +68,6 @@ void game_target(game_t *all)
     sfSprite *sprite4 = sfSprite_create();
 
     int j = 870;
-    srand(time(NULL));
 
     all->objs[4] = malloc(sizeof(object_t));
     all->objs[4]->texture = texture4;
@@ -82,6 +81,7 @@ void game_target(game_t *all)
     sfSprite_setScale(all->objs[4]->sprite, all->objs[4]->scale);
     sfSprite_setPosition(all->objs[4]->sprite, all->objs[4]->pos);
 
+    all->objs[4]->hitbox = sfSprite_getGlobalBounds(all->objs[4]->sprite);
 }
 
 void health(game_t *all)
@@ -139,7 +139,6 @@ void player(game_t *all)
 {
     sfTexture *texture14 = sfTexture_createFromFile("ressources/sprites/player/chevalier.png", NULL);
     sfSprite *sprite14 = sfSprite_create();
-
     all->objs[14] = malloc(sizeof(object_t));
     all->objs[14]->texture = texture14;
     all->objs[14]->sprite = sprite14;
@@ -148,26 +147,51 @@ void player(game_t *all)
     all->objs[14]->pos.x = 100;
     all->objs[14]->pos.y = 870;
     sfSprite_setTexture(all->objs[14]->sprite, all->objs[14]->texture, sfTrue);
+    sfSprite_setTextureRect(all->objs[14]->sprite, (sfIntRect){0, 0, 250, 250});
     sfSprite_setScale(all->objs[14]->sprite, all->objs[14]->scale);
     sfSprite_setPosition(all->objs[14]->sprite, all->objs[14]->pos);
+
+    all->objs[14]->hitbox = sfSprite_getGlobalBounds(all->objs[14]->sprite);
 }
 
 void game_window_manager(int ac, char **av, game_t *all)
 {
+    sfEvent event;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    int score = 0;
+    char score_text[10];
     all->params.vie = 3;
-    all->params.j = 3;
+    all->params.j = 10;
     sfSoundBuffer *soundBuffer = sfSoundBuffer_createFromFile("ressources/sounds/effects/hit_song.wav");
     sfSound *sound = sfSound_create();
-    sfEvent event;
     sfTexture *newtexture = sfTexture_createFromFile("ressources/sprites/ath/bad_heart.png", NULL);
     sfSprite *target = all->objs[4]->sprite;
-    sfClock *clock = sfClock_create();
+    sfFloatRect intersection;
     sfRenderWindow_setFramerateLimit(all->params.window, 32);
-    sfTime time;
     init_game_music(all);
+    sfFont *font = sfFont_createFromFile("ressources/fonts/cubics_fonts.ttf");
+    sfText *text = sfText_create();
+    sfText_setFont(text, font);
+    sfText_setCharacterSize(text, 30);
+    sfText_setColor(text, sfWhite);
+    sfText_setPosition(text, (sfVector2f){900, 10});
+
+    clock = sfClock_create();
+
     while (sfRenderWindow_isOpen(all->params.window)) {
         while (sfRenderWindow_pollEvent(all->params.window, &event)) {
             close_window(all);
+        }
+        time = sfClock_getElapsedTime(clock);
+        seconds = time.microseconds / 1000000.0;
+        if (seconds >= 1.0)
+        {
+            score++;
+            sprintf(score_text, "Score: %d", score);
+            sfText_setString(text, score_text);
+            sfClock_restart(clock);
         }
         if (all->objs[3]->pos.x != -1920) {
             all->objs[3]->pos.x = all->objs[3]->pos.x - 1;
@@ -223,6 +247,7 @@ void game_window_manager(int ac, char **av, game_t *all)
         sfRenderWindow_drawSprite(all->params.window, all->objs[8]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, all->objs[14]->sprite, NULL);
         sfRenderWindow_drawSprite(all->params.window, target, NULL);
+        sfRenderWindow_drawText(all->params.window, text, NULL);
         sfRenderWindow_display(all->params.window);
 
         if (event.type == sfEvtMouseButtonPressed && all->objs[14]->pos.y == 870) {
